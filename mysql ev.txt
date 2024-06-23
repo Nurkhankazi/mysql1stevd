@@ -1,0 +1,18 @@
+ Create Manufacturer table:
+CREATE TABLE Manufacturer(id int primary key AUTO_INCREMENT,name varchar(50),address varchar(100), contact_no varchar(50));
+
+CREATE TABLE product(id int primary key AUTO_INCREMENT,manufacturer_id int, name varchar(50),price double(8,2));
+
+create procedure:
+CREATE PROCEDURE insert_manufacturer(IN manu_name varchar(50),IN manu_add varchar(100),IN cont_no varchar(50))
+INSERT into manufacturer set name=manu_name, address=manu_add,contact_no = cont_no;
+
+Delete trigger:
+CREATE TRIGGER `delete_product` AFTER DELETE ON `Manufacturer` FOR EACH ROW delete from product where manufacturer_id=old.id;
+
+create view:
+
+create view `high_product` AS  select * from product where price>=5000 ;
+
+Query for view:
+"call insert_manufacturer('$i','$n','$a','$c')";
